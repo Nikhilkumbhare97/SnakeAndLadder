@@ -8,6 +8,7 @@ public class snakeLadder {
 	public static void main (String[] args) {
 		//Variables
 		int currentPosition = 0;
+		int dieTimes = 0;
 
 		//Computation
 		while (currentPosition != END_POSITION)
@@ -15,40 +16,46 @@ public class snakeLadder {
 			int rollDice, rollDice1;
 			rollDice = (int) Math.floor(Math.random() * 10) % 6 + 1;
 			currentPosition += rollDice;
+			dieTimes = dieTimes + 1;
+
+			System.out.println("Die Number : "+dieTimes);
 
 			if (currentPosition > END_POSITION) {
 				currentPosition -= rollDice;
+				System.out.println("Current Position : "+currentPosition);
 			}else {
-
+				System.out.println("Current Position : "+currentPosition);
 				int checkPlay = (int) Math.floor(Math.random() * 10) % 3;
 				switch (checkPlay)
 				{
 					case LADDER:
 						rollDice1 = (int) Math.floor(Math.random() * 10) % 6 + 1;
+						dieTimes = dieTimes + 1;
 						if ((END_POSITION - currentPosition) < rollDice1) {
 							currentPosition += 0;
 						}else {
 							currentPosition += rollDice1;
 						}
+						System.out.println("Die Number : "+dieTimes);
+						System.out.println("Current Position : "+currentPosition);
 						break;
 					case SNAKE:
 						rollDice1 = (int) Math.floor(Math.random() * 10) % 6 + 1;
+						dieTimes = dieTimes + 1;
 						if (currentPosition < rollDice1) {
 							currentPosition = START_POSITION;
 						}else {
 							currentPosition -= rollDice1;
 						}
+						System.out.println("Die Number : "+dieTimes);
+						System.out.println("Current Position : "+currentPosition);
 						break;
 					default:
 						//No Play
-						if (currentPosition > END_POSITION) {
-							currentPosition -= rollDice;
-						}else {
 							currentPosition += 0;
-						}
 				}
 			}
-			System.out.println("Current Position : "+currentPosition);
 		}
+		System.out.println("Number of Times Die Played : "+dieTimes);
 	}
 }
